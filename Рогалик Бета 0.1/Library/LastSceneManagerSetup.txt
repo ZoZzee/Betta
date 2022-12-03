@@ -1,0 +1,5 @@
+sceneSetups:
+- path: "Assets/\u041F\u0440\u043E\u0435\u043A\u0442/Scenes/PrePull.unity"
+  isLoaded: 1
+  isActive: 1
+  isSubScene: 0
