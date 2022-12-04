@@ -8,8 +8,7 @@ public class BottleHeal : MonoBehaviour
     // Start is called before the first frame update
     public void BottleActive()
     {
-        Debug.Log("BottleDelete ");
-        Destroy(gameObject);
+        //gameObject.
         
     }
 }

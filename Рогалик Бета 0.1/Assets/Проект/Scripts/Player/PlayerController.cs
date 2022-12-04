@@ -114,7 +114,6 @@ public class PlayerController : MonoBehaviour
                         holyWater-=1;
                         HPController();
                         Debug.Log("HP = " + playerHP);
-                        myBottle.BottleActive();
                     }
                 }
                 break;
@@ -138,8 +137,8 @@ public class PlayerController : MonoBehaviour
             int number = holyWater < 3 ? 1 : 0;
             holyWater += number;
             Debug.Log("HolyWater = " + holyWater);
-            Destroy(HolyW.gameObject);
-            NmberHolyWater--;
+            Destroy(collision.gameObject);
+            holyWater--;
 
         }
     }
@@ -149,8 +148,10 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                NmberHolyWater++;
-                myBottle.BottleActive();
+                holyWater++;
+                //myBottle.BottleActive();
+                Debug.Log("HolyWater = " + holyWater);
+                Destroy(other.gameObject);
             }
             
         }
@@ -173,7 +174,7 @@ public class PlayerController : MonoBehaviour
             ColliderZone();
 
         }
-
+        
     }
 
     void Update()
