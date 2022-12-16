@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private int holyWater;
     private int NmberHolyWater;
 
-    private float time;
+    private float time = 1.0f;
 
     private BottleHeal myBottle;
 
@@ -50,18 +50,17 @@ public class PlayerController : MonoBehaviour
             //Vector3 friendPos = Friend.transform.position;
             //distansEnemy = Vector3.Distance(enemyPos, playerPos);
             distansHolyWaterPos = Vector3.Distance(holyWaterPos, playerPos);
-            
+
 
             if (distansHolyWaterPos <= 3)
             {
-                
+
                 int number = holyWater < 3 ? 1 : 0;
                 holyWater += number;
                 Debug.Log("HolyWater = " + holyWater);
                 //Destroy(HolyW.gameObject);
-                myBottle.BottleActive();
                 NmberHolyWater--;
-                
+
             }
             /*if (distansEnemy <= 5)
             {
@@ -71,10 +70,10 @@ public class PlayerController : MonoBehaviour
             }
             Debug.Log("HP = " + playerHP);*/
         }
-        
+
     }
 
-    public void HpApdate (float numer , bool damageHp, float damage)
+    public void HpApdate(float numer, bool damageHp, float damage)
     {
         switch (numer)
         {
@@ -94,7 +93,7 @@ public class PlayerController : MonoBehaviour
                         playerHP += hp;
                         HPController();
                         Debug.Log("HP = " + playerHP);
-                        
+
                     }
                 }
                 else
@@ -107,11 +106,11 @@ public class PlayerController : MonoBehaviour
                 {
                     Debug.Log("HP = " + playerHP);
 
-                    if (holyWater >= 1 && time == 0)
-                    {   
-                        
+                    if (holyWater >= 1)
+                    {
+
                         playerHP += damage;
-                        holyWater-=1;
+                        holyWater -= 1;
                         HPController();
                         Debug.Log("HP = " + playerHP);
                     }
@@ -122,7 +121,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Friend"))
+        if (collision.gameObject.CompareTag("Friend"))
         {
             bool friend = true;
             HpApdate(1, friend, 10f);
@@ -138,22 +137,32 @@ public class PlayerController : MonoBehaviour
             holyWater += number;
             Debug.Log("HolyWater = " + holyWater);
             Destroy(collision.gameObject);
-            holyWater--;
 
         }
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("BottleHeal"))
+
+        time -= Time.deltaTime;
+        
+        if (time <= 0.0f)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (other.gameObject.CompareTag("BottleHeal"))
             {
-                holyWater++;
-                //myBottle.BottleActive();
-                Debug.Log("HolyWater = " + holyWater);
-                Destroy(other.gameObject);
+
+                if (Input.GetKey(KeyCode.E))
+                {
+                    int number = holyWater < 3 ? 1 : 0;
+                    if (number == 1)
+                    {
+                        holyWater += number;
+                        Debug.Log("HolyWater = " + holyWater);
+                        Destroy(other.gameObject);
+                        time = 0.5f;
+                    }
+                }
             }
-            
+
         }
     }
 
@@ -174,12 +183,12 @@ public class PlayerController : MonoBehaviour
             ColliderZone();
 
         }
-        
+
     }
 
     void Update()
     {
-        
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             bool friend = true;

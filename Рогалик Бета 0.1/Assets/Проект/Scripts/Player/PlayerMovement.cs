@@ -27,6 +27,14 @@ public class PlayerMovement : MonoBehaviour
         jump = Input.GetButtonDown("Jump");
         transform.Translate(horizontalImput * speed , 0 , verticalImput * speed );
         transform.Rotate( 0, mouseMove * speedMouse , 0);
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            speed = speed + 5;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            speed = speed - 5;
+        }
     }
 
     void Jump()
