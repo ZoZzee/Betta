@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class BottleHeal : MonoBehaviour
 {
-    
     // Start is called before the first frame update
-    public void BottleActive()
+    void Start()
     {
-        //gameObject.
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         
     }
 }
